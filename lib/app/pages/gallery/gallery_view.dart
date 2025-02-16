@@ -33,7 +33,7 @@ class _GalleryViewState extends State<GalleryView>
         l.S.current.Development
       ];
 
-  List<GalleryItemModel> _items = [];
+  final List<GalleryItemModel> _items = [];
 
   late final tabController = TabController(
     length: _categories.length,

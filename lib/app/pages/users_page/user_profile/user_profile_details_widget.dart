@@ -90,7 +90,7 @@ class UserProfileDetailsWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildProfileDetailRow('${lang.fullName}', 'Sahidul Islam'),
+                _buildProfileDetailRow(lang.fullName, 'Sahidul Islam'),
                 Divider(
                   color: theme.colorScheme.outline,
                   height: 0.0,

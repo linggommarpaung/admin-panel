@@ -1,4 +1,4 @@
-package com.acnoo.acnoo_flutter_admin_panel
+package com.deutschefreunde.adminpanel
 
 import io.flutter.embedding.android.FlutterActivity
 
