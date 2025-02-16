@@ -262,6 +262,7 @@ List<_DashboardCalculationItemModel> get _dashboardCalculationItem =>
         ),
       ].map(
         (item) => _DashboardCalculationItemModel(
+          'all',
           title: item.$1,
           amount: item.$2,
           fluctuation: item.$3,
