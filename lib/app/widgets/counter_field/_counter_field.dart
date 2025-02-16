@@ -80,7 +80,6 @@ class _CounterFieldState extends State<CounterField> {
 
 class _ActionButton extends StatelessWidget {
   const _ActionButton({
-    super.key,
     this.borderRadius = BorderRadius.zero,
     this.onPressed,
     required this.icon,

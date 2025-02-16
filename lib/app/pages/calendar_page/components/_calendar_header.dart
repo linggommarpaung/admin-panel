@@ -252,7 +252,6 @@ class _SpacingInfo {
 
 class _DateSelectorButton extends StatelessWidget {
   const _DateSelectorButton({
-    super.key,
     this.onPreviousTap,
     this.onNextTap,
     this.selectedDate,

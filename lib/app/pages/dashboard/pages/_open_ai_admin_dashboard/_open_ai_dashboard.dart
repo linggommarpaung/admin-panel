@@ -277,11 +277,10 @@ class _DashboardCalculationItemModel {
   final String filterType;
   final Color tileColor;
 
-  const _DashboardCalculationItemModel({
+  const _DashboardCalculationItemModel(this.filterType, {
     required this.title,
     required this.amount,
     required this.fluctuation,
-    this.filterType = 'This Month',
     this.tileColor = Colors.greenAccent,
   });
 }

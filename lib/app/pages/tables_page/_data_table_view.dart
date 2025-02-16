@@ -107,9 +107,13 @@ class _DataTableViewState extends State<DataTableView> {
                             onReorder: (oldIndex, newIndex) {
                               setState(() {
                                 if (oldIndex < 0 ||
-                                    oldIndex >= employees.length) return;
+                                    oldIndex >= employees.length) {
+                                  return;
+                                }
                                 if (newIndex < 0 ||
-                                    newIndex >= employees.length) return;
+                                    newIndex >= employees.length) {
+                                  return;
+                                }
 
                                 // Adjust newIndex if it's greater than oldIndex
                                 if (newIndex > oldIndex) {
