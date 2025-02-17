@@ -716,13 +716,13 @@
       "languageVersion": "3.4"
     },
     {
-      "name": "acnoo_flutter_admin_panel",
+      "name": "dfi_admin_panel",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     }
   ],
-  "generated": "2025-02-17T10:34:02.644504Z",
+  "generated": "2025-02-17T11:40:53.483237Z",
   "generator": "pub",
   "generatorVersion": "3.7.0",
   "flutterRoot": "file:///Users/linggommarpaung/dev/flutter",
