@@ -9,7 +9,7 @@ environment:
   flutter: ^3.27.0
   
 dependencies:
-  flutter_localization: ^0.3.0
+  flutter_localization: ^0.3.1
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
@@ -55,6 +55,8 @@ dependencies:
     git: 
       url: https://github.com/iamtoricool/ResponsiveGrid_Flutter.git
       ref: master
+  flutter_localizations:
+    sdk: flutter
 
 
 
@@ -63,6 +65,7 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^5.0.0
   icons_launcher: ^3.0.0
+flutter_auto_localizations: ^1.0.0
 
 
 flutter:

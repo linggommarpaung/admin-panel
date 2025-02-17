@@ -1,0 +1,7 @@
+{
+    "dart.flutterSdkPath": null,
+    "dart.flutterAdbConnectOnChromeOs": true,
+    "dart.flutterSdkPaths": [
+        "~/dev/flutter/bin"
+    ]
+}
