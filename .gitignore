@@ -1,2 +1,4 @@
 *.apk
 .DS_Store
+build/
+!build/web/
