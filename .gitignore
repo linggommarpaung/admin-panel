@@ -4,3 +4,4 @@ build/
 !build/web/
 flutter/
 /.idx/
+.gitignore
