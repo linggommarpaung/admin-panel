@@ -3,5 +3,7 @@
     "dart.flutterAdbConnectOnChromeOs": true,
     "dart.flutterSdkPaths": [
         "~/dev/flutter/bin"
-    ]
+    ],
+    "IDX.aI.enableInlineCompletion": true,
+    "IDX.aI.enableCodebaseIndexing": true
 }
