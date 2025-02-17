@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.acnoo" "\0"
-            VALUE "FileDescription", "acnoo_flutter_admin_panel" "\0"
+            VALUE "FileDescription", "dfi_flutter_admin_panel" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "acnoo_flutter_admin_panel" "\0"
+            VALUE "InternalName", "dfi_flutter_admin_panel" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2024 com.acnoo. All rights reserved." "\0"
-            VALUE "OriginalFilename", "acnoo_flutter_admin_panel.exe" "\0"
-            VALUE "ProductName", "acnoo_flutter_admin_panel" "\0"
+            VALUE "OriginalFilename", "dfi_flutter_admin_panel.exe" "\0"
+            VALUE "ProductName", "dfi_flutter_admin_panel" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

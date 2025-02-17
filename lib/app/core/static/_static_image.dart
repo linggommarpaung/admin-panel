@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:acnoo_flutter_admin_panel/app/core/theme/_app_colors.dart';
+import 'package:dfi_flutter_admin_panel/app/core/theme/_app_colors.dart';
 
 abstract class AcnooStaticImage {
   static const bannerImage01 = 'assets/images/widget_images/banner_images/banner_image01.png';

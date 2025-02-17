@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 // 🌎 Project imports:
-import 'package:acnoo_flutter_admin_panel/app/pages/users_page/user_profile/user_profile_details_widget.dart';
-import 'package:acnoo_flutter_admin_panel/app/pages/users_page/user_profile/user_profile_update_widget.dart';
+import 'package:dfi_flutter_admin_panel/app/pages/users_page/user_profile/user_profile_details_widget.dart';
+import 'package:dfi_flutter_admin_panel/app/pages/users_page/user_profile/user_profile_update_widget.dart';
 import '../../../../generated/l10n.dart' as l;
 import '../../../core/helpers/fuctions/_get_image.dart';
 import '../../../widgets/shadow_container/_shadow_container.dart';

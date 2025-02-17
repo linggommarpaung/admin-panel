@@ -29,7 +29,7 @@ class AllSale {
       unit: 'Pcs',
       salePrice: '\$500',
       subTotal: '\$500',
-      //G:\acnoo_flutter_admin_panel\assets\images\static_images\product_images\product_image_09.png
+      //G:\dfi_flutter_admin_panel\assets\images\static_images\product_images\product_image_09.png
     ),
     Purchase(
       image: 'assets/images/static_images/product_images/product_image_25.png',
@@ -38,7 +38,7 @@ class AllSale {
       unit: 'Pcs',
       salePrice: '\$500',
       subTotal: '\$500',
-      //G:\acnoo_flutter_admin_panel\assets\images\static_images\product_images\product_image_25.png
+      //G:\dfi_flutter_admin_panel\assets\images\static_images\product_images\product_image_25.png
     )
   ];
 }

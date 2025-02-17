@@ -7,7 +7,7 @@ import 'package:responsive_framework/responsive_framework.dart' as rf;
 import 'package:responsive_grid/responsive_grid.dart';
 
 // 🌎 Project imports:
-import 'package:acnoo_flutter_admin_panel/app/core/theme/theme.dart';
+import 'package:dfi_flutter_admin_panel/app/core/theme/theme.dart';
 import '../../../generated/l10n.dart' as l;
 import '../../widgets/widgets.dart';
 

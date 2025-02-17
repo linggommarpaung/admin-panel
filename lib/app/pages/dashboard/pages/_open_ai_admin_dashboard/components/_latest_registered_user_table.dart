@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 // 🌎 Project imports:
-import 'package:acnoo_flutter_admin_panel/app/core/theme/theme.dart';
+import 'package:dfi_flutter_admin_panel/app/core/theme/theme.dart';
 import '../../../../../../generated/l10n.dart' as l;
 import '../../../../../core/static/static.dart';
 import '../../../../../models/models.dart' as model;

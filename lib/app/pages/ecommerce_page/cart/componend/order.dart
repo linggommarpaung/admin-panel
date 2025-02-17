@@ -1,5 +1,5 @@
 // 🐦 Flutter imports:
-import 'package:acnoo_flutter_admin_panel/app/core/theme/theme.dart';
+import 'package:dfi_flutter_admin_panel/app/core/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 // 📦 Package imports:
@@ -7,7 +7,7 @@ import 'package:intl/intl.dart' as intl;
 import 'package:responsive_grid/responsive_grid.dart';
 import '../../../../../generated/l10n.dart' as l;
 // 🌎 Project imports:
-import 'package:acnoo_flutter_admin_panel/app/core/helpers/helpers.dart';
+import 'package:dfi_flutter_admin_panel/app/core/helpers/helpers.dart';
 
 class Order extends StatelessWidget {
   const Order({super.key});

@@ -1,5 +1,5 @@
 // 🐦 Flutter imports:
-import 'package:acnoo_flutter_admin_panel/app/core/static/_static_values.dart';
+import 'package:dfi_flutter_admin_panel/app/core/static/_static_values.dart';
 import 'package:flutter/material.dart';
 
 // 📦 Package imports:

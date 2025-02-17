@@ -7,7 +7,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 // 🌎 Project imports:
-import 'package:acnoo_flutter_admin_panel/generated/l10n.dart' as l;
+import 'package:dfi_flutter_admin_panel/generated/l10n.dart' as l;
 import '../../../../core/helpers/field_styles/field_styles.dart';
 import '../../../../widgets/widgets.dart';
 

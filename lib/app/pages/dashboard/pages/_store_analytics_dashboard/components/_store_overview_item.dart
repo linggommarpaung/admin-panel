@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:acnoo_flutter_admin_panel/generated/l10n.dart' as l;
+import 'package:dfi_flutter_admin_panel/generated/l10n.dart' as l;
 
 class StoreOverviewWidget extends StatefulWidget {
   const StoreOverviewWidget({

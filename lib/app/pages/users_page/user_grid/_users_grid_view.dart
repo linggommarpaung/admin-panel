@@ -6,7 +6,7 @@ import 'package:responsive_framework/responsive_framework.dart' as rf;
 import 'package:responsive_grid/responsive_grid.dart';
 
 // 🌎 Project imports:
-import 'package:acnoo_flutter_admin_panel/app/pages/users_page/user_grid/demo_users.dart';
+import 'package:dfi_flutter_admin_panel/app/pages/users_page/user_grid/demo_users.dart';
 import '../../../widgets/user_grid_widget/user_grid_widget.dart';
 
 class UsersGridView extends StatelessWidget {

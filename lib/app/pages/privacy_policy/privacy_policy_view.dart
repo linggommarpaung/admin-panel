@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 // 🌎 Project imports:
-import 'package:acnoo_flutter_admin_panel/app/widgets/shadow_container/_shadow_container.dart';
-import 'package:acnoo_flutter_admin_panel/generated/l10n.dart' as l;
+import 'package:dfi_flutter_admin_panel/app/widgets/shadow_container/_shadow_container.dart';
+import 'package:dfi_flutter_admin_panel/generated/l10n.dart' as l;
 
 class PrivacyPolicyView extends StatefulWidget {
   const PrivacyPolicyView({super.key});
