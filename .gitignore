@@ -4,4 +4,3 @@ build/
 !build/web/
 flutter/
 /.idx/
-.dart_tool
