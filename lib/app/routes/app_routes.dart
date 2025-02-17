@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+
 // 🌎 Project imports:
 import '../pages/pages.dart';
 import '../providers/providers.dart';
+import '../public_user/public_home_view.dart'; // Import halaman publik --
 
 abstract class AcnooAppRoutes {
   //--------------Navigator Keys--------------//
@@ -27,7 +29,7 @@ abstract class AcnooAppRoutes {
           if (state.uri.queryParameters['rtl'] == 'true') {
             _appLangProvider.isRTL = true;
           }
-          return '/dashboard/ecommerce-admin';
+          return '/public';
         },
       ),
 
@@ -619,6 +621,12 @@ abstract class AcnooAppRoutes {
         path: '/authentication/signin',
         pageBuilder: (context, state) => const NoTransitionPage(
           child: SigninView(),
+        ),
+      ),
+      GoRoute(
+        path: '/public',
+        pageBuilder: (context, state) => const NoTransitionPage<void>(
+          child: PublicHomeView(),
         ),
       )
     ],
