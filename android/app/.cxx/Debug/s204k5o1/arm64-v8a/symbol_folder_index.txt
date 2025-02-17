@@ -1,0 +1,1 @@
+/Users/linggommarpaung/Documents/GitHub/admin-panel/build/app/intermediates/cxx/Debug/s204k5o1/obj/arm64-v8a
