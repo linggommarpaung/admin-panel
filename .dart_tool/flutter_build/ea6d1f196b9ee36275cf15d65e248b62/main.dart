@@ -1,5 +1,5 @@
 // @dart=3.4
-// Flutter web bootstrap script for package:acnoo_flutter_admin_panel/main.dart.
+// Flutter web bootstrap script for package:dfi_flutter_admin_panel/main.dart.
 //
 // Generated file. Do not edit.
 //
@@ -9,7 +9,7 @@
 import 'dart:ui_web' as ui_web;
 import 'dart:async';
 
-import 'package:acnoo_flutter_admin_panel/main.dart' as entrypoint;
+import 'package:dfi_flutter_admin_panel/main.dart' as entrypoint;
 import 'web_plugin_registrant.dart' as pluginRegistrant;
 
 typedef _UnaryFunction = dynamic Function(List<String> args);

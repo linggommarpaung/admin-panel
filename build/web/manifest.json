@@ -1,6 +1,6 @@
 {
-    "name": "acnoo_flutter_admin_panel",
-    "short_name": "acnoo_flutter_admin_panel",
+    "name": "dfi_flutter_admin_panel",
+    "short_name": "dfi_flutter_admin_panel",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
