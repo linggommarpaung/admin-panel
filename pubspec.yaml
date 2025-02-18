@@ -57,6 +57,7 @@ dependencies:
       ref: master
   flutter_localizations:
     sdk: flutter
+  google_mobile_ads: ^5.3.1
 
 
 

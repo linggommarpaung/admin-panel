@@ -3,7 +3,7 @@ import '/app/pages/authentication/signin_view.dart'; // Import SigninView
 
 
 class PublicHomeView extends StatelessWidget {
-  const PublicHomeView({Key? key}) : super(key: key);
+  const PublicHomeView({super.key});
 
   @override
   Widget build(BuildContext context) {

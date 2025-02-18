@@ -10,6 +10,10 @@ import '../../../../../generated/l10n.dart' as l;
 import '../../../../core/theme/theme.dart';
 import '../../../../widgets/widgets.dart';
 import 'components/_components.dart' as comp;
+import '/app/widgets/ads.dart'; // Sesuaikan path jika perlu
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
+
 
 class ECommerceAdminDashboardView extends StatelessWidget {
   const ECommerceAdminDashboardView({super.key});
@@ -31,6 +35,12 @@ class ECommerceAdminDashboardView extends StatelessWidget {
         padding: EdgeInsetsDirectional.all(_padding / 2.5),
         child: Column(
           children: [
+
+            MyBannerAd(
+              adSize: AdSize.banner, // Sesuaikan ukuran jika diperlukan
+              adUnitId:
+                  'ca-app-pub-3940256099942544/9214589741', // Ganti dengan ID unit iklan AdMob Anda
+            ),
             // Overviews
             ResponsiveGridRow(
               rowSegments: 100,
