@@ -16,8 +16,6 @@ import 'app/core/theme/theme.dart';
 import 'app/providers/providers.dart';
 import 'app/routes/app_routes.dart';
 import 'generated/l10n.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-
 
 Future<void> main() async {
   setPathUrlStrategy();
@@ -27,9 +25,6 @@ Future<void> main() async {
     md: 1240,
     lg: double.infinity,
   );
-    WidgetsFlutterBinding.ensureInitialized();
-    await MobileAds.instance.initialize();
-
 
   final _app = MultiProvider(
     providers: [

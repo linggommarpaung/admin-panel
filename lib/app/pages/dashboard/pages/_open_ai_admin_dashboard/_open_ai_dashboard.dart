@@ -28,7 +28,7 @@ class OpenAIDashboardView extends StatelessWidget {
             ResponsiveGridRow(
               children: List.generate(
                 8,
-                (index) {
+                    (index) {
                   final _item = _overviewItems[index];
 
                   return ResponsiveGridCol(
@@ -112,7 +112,7 @@ class OpenAIDashboardView extends StatelessWidget {
               rowSegments: 100,
               children: List.generate(
                 _dashboardCalculationItem.length,
-                (index) {
+                    (index) {
                   final _item = _dashboardCalculationItem[index];
                   return ResponsiveGridCol(
                     lg: 20,
@@ -129,7 +129,7 @@ class OpenAIDashboardView extends StatelessWidget {
                         showCurrency: index > 1,
                         showCompactValue: index > 1,
                         showCompactFluctuation:
-                            index + 1 == _dashboardCalculationItem.length,
+                        index + 1 == _dashboardCalculationItem.length,
                         fluctuationBgDecoration: const BoxDecoration(),
                         fluctuationBgPadding: EdgeInsets.zero,
                       ),
@@ -231,37 +231,37 @@ List<_DashboardCalculationItemModel> get _dashboardCalculationItem =>
     <_DashboardCalculationItemModel>[
       ...[
         (
-          l.S.current.totalUsers,
-          5000,
-          200,
-          const Color(0xffB9FDEC),
+        l.S.current.totalUsers,
+        5000,
+        200,
+        const Color(0xffB9FDEC),
         ),
         (
-          l.S.current.totalIncome,
-          3000,
-          500,
-          const Color(0xffC5FDBF),
+        l.S.current.totalIncome,
+        3000,
+        500,
+        const Color(0xffC5FDBF),
         ),
         (
-          l.S.current.totalSubscription,
-          55000,
-          15000,
-          const Color(0xffC8E6FE),
+        l.S.current.totalSubscription,
+        55000,
+        15000,
+        const Color(0xffC8E6FE),
         ),
         (
-          l.S.current.totalExpense,
-          20500,
-          5000,
-          const Color(0xffFFD6E2),
+        l.S.current.totalExpense,
+        20500,
+        5000,
+        const Color(0xffFFD6E2),
         ),
         (
-          l.S.current.totalProfit,
-          30500,
-          20000,
-          const Color(0xffDFDAFF),
+        l.S.current.totalProfit,
+        30500,
+        20000,
+        const Color(0xffDFDAFF),
         ),
       ].map(
-        (item) => _DashboardCalculationItemModel(
+            (item) => _DashboardCalculationItemModel(
           'all',
           title: item.$1,
           amount: item.$2,
@@ -287,69 +287,69 @@ class _DashboardCalculationItemModel {
 }
 
 List<OverviewItem> get _overviewItems => <OverviewItem>[
-      ...[
-        (
-          "assets/images/widget_images/dashboard_overview_icon/edit_icon.png",
-          500,
-          //"Generated Article",
-          l.S.current.generatedArticle,
-          const Color(0xffAD00FF)
-        ),
-        (
-          "assets/images/widget_images/dashboard_overview_icon/speech_to_text.png",
-          500,
-          //"Speech To Text ",
-          l.S.current.speechToText,
-          const Color(0xff00AD66)
-        ),
-        (
-          "assets/images/widget_images/dashboard_overview_icon/image_icon.png",
-          500,
-          //"Images Generated ",
-          l.S.current.imagesGenerated,
-          const Color(0xff4429FF)
-        ),
-        (
-          "assets/images/widget_images/dashboard_overview_icon/pdf_icon.png",
-          500,
-          //"PDF Generate ",
-          l.S.current.PDFGenerate,
-          const Color(0xffEE11E5)
-        ),
-        (
-          "assets/images/widget_images/dashboard_overview_icon/code_icon.png",
-          500,
-          //"Code Generated ",
-          l.S.current.codeGenerated,
-          const Color(0xffFE6921)
-        ),
-        (
-          "assets/images/widget_images/dashboard_overview_icon/voiceover_icon.png",
-          500,
-          //"Voiceover Generated ",
-          l.S.current.voiceoverGenerated,
-          const Color(0xff1570EF)
-        ),
-        (
-          "assets/images/widget_images/dashboard_overview_icon/document_icon.png",
-          500,
-          //"Document Generated",
-          l.S.current.documentGenerated,
-          const Color(0xff00AD66)
-        ),
-        (
-          "assets/images/widget_images/dashboard_overview_icon/credit_card_icon.png",
-          500,
-          //"Total Credit Balance",
-          l.S.current.totalCreditBalance,
-          const Color(0xff8106FB)
-        ),
-      ].map(
+  ...[
+    (
+    "assets/images/widget_images/dashboard_overview_icon/edit_icon.png",
+    500,
+    //"Generated Article",
+    l.S.current.generatedArticle,
+    const Color(0xffAD00FF)
+    ),
+    (
+    "assets/images/widget_images/dashboard_overview_icon/speech_to_text.png",
+    500,
+    //"Speech To Text ",
+    l.S.current.speechToText,
+    const Color(0xff00AD66)
+    ),
+    (
+    "assets/images/widget_images/dashboard_overview_icon/image_icon.png",
+    500,
+    //"Images Generated ",
+    l.S.current.imagesGenerated,
+    const Color(0xff4429FF)
+    ),
+    (
+    "assets/images/widget_images/dashboard_overview_icon/pdf_icon.png",
+    500,
+    //"PDF Generate ",
+    l.S.current.PDFGenerate,
+    const Color(0xffEE11E5)
+    ),
+    (
+    "assets/images/widget_images/dashboard_overview_icon/code_icon.png",
+    500,
+    //"Code Generated ",
+    l.S.current.codeGenerated,
+    const Color(0xffFE6921)
+    ),
+    (
+    "assets/images/widget_images/dashboard_overview_icon/voiceover_icon.png",
+    500,
+    //"Voiceover Generated ",
+    l.S.current.voiceoverGenerated,
+    const Color(0xff1570EF)
+    ),
+    (
+    "assets/images/widget_images/dashboard_overview_icon/document_icon.png",
+    500,
+    //"Document Generated",
+    l.S.current.documentGenerated,
+    const Color(0xff00AD66)
+    ),
+    (
+    "assets/images/widget_images/dashboard_overview_icon/credit_card_icon.png",
+    500,
+    //"Total Credit Balance",
+    l.S.current.totalCreditBalance,
+    const Color(0xff8106FB)
+    ),
+  ].map(
         (item) => OverviewItem(
-          iconPath: item.$1,
-          value: item.$2,
-          subtitle: item.$3,
-          iconColor: item.$4.withOpacity(0.15),
-        ),
-      )
-    ];
+      iconPath: item.$1,
+      value: item.$2,
+      subtitle: item.$3,
+      iconColor: item.$4.withOpacity(0.15),
+    ),
+  )
+];

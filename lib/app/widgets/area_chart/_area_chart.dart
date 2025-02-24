@@ -1,8 +1,7 @@
 // 🐦 Flutter imports:
-import 'package:flutter/material.dart';
-
 // 📦 Package imports:
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart' as rf;
 
 // 🌎 Project imports:
@@ -111,7 +110,7 @@ class _AreaChartState extends State<AreaChart> {
     );
   }
 
-  Widget bottomTitleWidgets(value, meta) {
+  Widget bottomTitleWidgets(double value, TitleMeta meta) {
     final fontSize = rf.ResponsiveValue<double?>(context, conditionalValues: [
       rf.Condition.smallerThan(name: BreakpointName.SM.name, value: 10)
     ]).value;
@@ -163,7 +162,7 @@ class _AreaChartState extends State<AreaChart> {
     }
 
     return SideTitleWidget(
-      axisSide: meta.axisSide,
+      meta: meta,
       child: Padding(
         padding: const EdgeInsetsDirectional.only(end: 24),
         child: text,
