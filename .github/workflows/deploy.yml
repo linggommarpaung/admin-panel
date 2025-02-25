@@ -23,12 +23,3 @@ jobs:
           remote_port: 64000 # Port SSH
           remote_key: ${{ secrets.SERVER_SSH_KEY }} # Kunci SSH yang digunakan untuk otentikasi
           remote_path: /home/deutsche/admin.deutschefreunde.com # Folder di server tujuan deployment
-
-      
-      - name: Create .htaccess
-        uses: actions/setup-node@v3  # Perlu untuk menjalankan script bash jika menggunakan node
-        with:
-            node-version: 16  # Versi node, disesuaikan dengan kebutuhan
-        
-            run: |
-            ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} -p 64000 "sudo sh -c 'echo -e \"RewriteEngine On\\nRewriteBase /\\nRewriteCond %{REQUEST_FILENAME} !-f\\nRewriteCond %{REQUEST_FILENAME} !-d\\nRewriteRule . /index.html [L]\" > /home/deutsche/admin.deutschefreunde.com/.htaccess'"
