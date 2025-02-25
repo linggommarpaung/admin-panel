@@ -27,7 +27,7 @@ abstract class AcnooAppRoutes {
           if (state.uri.queryParameters['rtl'] == 'true') {
             _appLangProvider.isRTL = true;
           }
-          return 'dashboard/earning-admin';
+          return '/dashboard/ecommerce-admin';
         },
       ),
 
