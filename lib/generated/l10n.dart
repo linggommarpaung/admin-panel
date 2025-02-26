@@ -180,6 +180,76 @@ class S {
     );
   }
 
+  ///Sign Up succsessful
+  String get signupSuccessful {
+    return Intl.message(
+      'Sign Up succsessful',
+      name: 'signupSuccessful',
+      desc: '',
+      args: [],
+    );
+  }
+
+  ///Sign Up failed
+  String get signupFailed {
+    return Intl.message(
+      'Sign Up failed',
+      name: 'signupFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  ///Network Error
+  String get networkError {
+    return Intl.message(
+      'Network Error',
+      name: 'networkError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  ///Please enter full name
+  String get pleaseEnterFullName {
+    return Intl.message(
+      'Please enter full name',
+      name: 'pleaseEnterFullName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  ///Please enter email
+  String get pleaseEnterEmail {
+    return Intl.message(
+      'Please enter email',
+      name: 'pleaseEnterEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  ///Invalid email
+  String get invalidEmail {
+    return Intl.message(
+      'Invalid email',
+      name: 'invalidEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  ///Please enter password
+  String get pleaseEnterPassword {
+    return Intl.message(
+      'Please enter password',
+      name: 'pleaseEnterPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Use Google`
   String get useGoogle {
     return Intl.message(

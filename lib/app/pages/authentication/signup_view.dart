@@ -13,6 +13,10 @@ import '../../core/helpers/fuctions/helper_functions.dart';
 import '../../core/static/static.dart';
 import '../../widgets/widgets.dart';
 
+//Sign Up View
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
 class SignupView extends StatefulWidget {
   const SignupView({super.key});
 
@@ -22,6 +26,58 @@ class SignupView extends StatefulWidget {
 
 class _SignupViewState extends State<SignupView> {
   bool showPassword = false;
+  final _formKey = GlobalKey<FormState>();
+  final _fullNameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  bool _isLoading = false; // Menambahkan state untuk loading
+
+  Future<void> _submitForm() async {
+    final lang = l.S.of(context); // <----- PINDAHKAN DISINI
+    if (_formKey.currentState!.validate()) {
+      setState(() => _isLoading = true); // Mengatur loading menjadi true
+      try {
+        final response = await http.post(
+          Uri.parse(
+              'YOUR_API_ENDPOINT'), // <----- Ganti dengan API endpoint kamu
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode(<String, String>{
+            'fullName': _fullNameController.text,
+            'email': _emailController.text,
+            'password': _passwordController.text,
+          }),
+        );
+
+        if (response.statusCode == 201) {
+          // <----- Ganti dengan kode sukses yang sesuai
+          // Pendaftaran berhasil, tampilkan pesan dan/atau navigasi
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+                content:
+                    Text(lang.signupSuccessful)), // "Pendaftaran berhasil!"
+          );
+          context.go('/authentication/signin'); // Navigasi ke halaman login
+        } else {
+          // Tangani kesalahan pendaftaran
+          final errorData = jsonDecode(response.body);
+          String errorMessage = errorData['error'] ??
+              lang.signupFailed; // "Pendaftaran gagal" sesuaikan juga dengan l10n
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(errorMessage)),
+          );
+        }
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text(lang.networkError)), // "Kesalahan jaringan" sesuaikan juga dengan l10n
+        );
+      } finally {
+        setState(() => _isLoading = false); // Mengatur loading menjadi false
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,8 +128,10 @@ class _SignupViewState extends State<SignupView> {
                         child: ConstrainedBox(
                           constraints: const BoxConstraints(maxWidth: 375),
                           child: Center(
-                            child: SingleChildScrollView(
-                              padding: const EdgeInsets.all(16),
+                              child: SingleChildScrollView(
+                            padding: const EdgeInsets.all(16),
+                            child: Form(
+                              key: _formKey,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -183,6 +241,15 @@ class _SignupViewState extends State<SignupView> {
                                     //labelText: 'Full Name',
                                     labelText: lang.fullName,
                                     inputField: TextFormField(
+                                      controller:
+                                          _fullNameController, // <----- Tambahkan controller
+                                      validator: (value) {
+                                        // <----- Tambahkan validator
+                                        if (value == null || value.isEmpty) {
+                                          return lang.pleaseEnterFullName; // "Silakan masukkan nama lengkap"
+                                        }
+                                        return null;
+                                      },
                                       decoration: InputDecoration(
                                         // hintText: 'Enter full name',
                                         hintText: lang.enterFullName,
@@ -196,6 +263,21 @@ class _SignupViewState extends State<SignupView> {
                                     // labelText: 'Email',
                                     labelText: lang.email,
                                     inputField: TextFormField(
+                                      controller:
+                                          _emailController, // <----- Tambahkan controller
+                                      keyboardType: TextInputType
+                                          .emailAddress, // <----- Tambahkan keyboard type
+                                      validator: (value) {
+                                        // <----- Tambahkan validator
+                                        if (value == null || value.isEmpty) {
+                                          return lang.pleaseEnterEmail; // "Silakan masukkan email"
+                                        }
+                                        if (!HelperFunctions.isValidEmail(
+                                            value)) {
+                                          return lang.invalidEmail; // "Email tidak valid"
+                                        }
+                                        return null;
+                                      },
                                       decoration: InputDecoration(
                                         //hintText: 'Enter email address',
                                         hintText: lang.enterEmailAddress,
@@ -209,7 +291,17 @@ class _SignupViewState extends State<SignupView> {
                                     //labelText: 'Password',
                                     labelText: lang.password,
                                     inputField: TextFormField(
+                                      controller:
+                                          _passwordController, // <----- Tambahkan controller
                                       obscureText: !showPassword,
+                                      validator: (value) {
+                                        // <----- Tambahkan validator
+                                        if (value == null || value.isEmpty) {
+                                          return lang.pleaseEnterPassword; // "Silakan masukkan password"
+                                        }
+                                        // Tambahkan validasi password yang lebih kompleks jika diperlukan
+                                        return null;
+                                      },
                                       decoration: InputDecoration(
                                         //hintText: 'Enter your password',
                                         hintText: lang.enterYourPassword,
@@ -231,16 +323,20 @@ class _SignupViewState extends State<SignupView> {
                                   // Submit Button
                                   SizedBox(
                                     width: double.maxFinite,
-                                    child: ElevatedButton(
-                                      onPressed: () {},
-                                      //child: const Text('Sign Up'),
-                                      child: Text(lang.signUp),
-                                    ),
-                                  )
+                                    child:
+                                        _isLoading // <----- Menampilkan CircularProgressIndicator saat loading
+                                            ? const CircularProgressIndicator()
+                                            : ElevatedButton(
+                                                onPressed:
+                                                    _submitForm, // <----- Panggil _submitForm disini
+                                                child: Text(
+                                                    lang.signUp), // "Sign Up"
+                                              ),
+                                  ),
                                 ],
                               ),
                             ),
-                          ),
+                          )),
                         ),
                       ),
                     ],
@@ -269,5 +365,13 @@ class _SignupViewState extends State<SignupView> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _fullNameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 }

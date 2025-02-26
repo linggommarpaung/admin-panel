@@ -16,6 +16,10 @@ dependencies:
   flutter_localization: ^0.3.0
   flutter:
     sdk: flutter
+
+  http: ^1.1.0
+  convert: ^3.1.1
+
   cupertino_icons: ^1.0.8
   responsive_framework: ^1.5.1
   provider: ^6.1.2
