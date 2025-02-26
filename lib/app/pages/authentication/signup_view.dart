@@ -39,7 +39,7 @@ class _SignupViewState extends State<SignupView> {
       try {
         final response = await http.post(
           Uri.parse(
-              'YOUR_API_ENDPOINT'), // <----- Ganti dengan API endpoint kamu
+              'https://api.tun.asia/signup.php'), // <----- Ganti dengan API endpoint kamu
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },
