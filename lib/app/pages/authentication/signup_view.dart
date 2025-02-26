@@ -64,7 +64,7 @@ class _SignupViewState extends State<SignupView> {
         } else {
           //Check Error
           String errorMessage = lang.signupFailed;
-          if (responseData['message'] == "oops! Email already registered!") {
+          if (responseData['message'] == "Oops! Email already registered!") {
             errorMessage = lang.emailAlreadyExist; // Email already exist
           } else if (responseData['message'] == "Register failed!") {
             errorMessage = lang.dataNotComplete; // Data not complete, or method not allowed
