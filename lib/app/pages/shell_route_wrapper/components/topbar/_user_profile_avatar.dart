@@ -42,7 +42,7 @@ class UserProfileAvatar extends StatelessWidget {
                   vertical: -4,
                 ),
                 contentPadding: EdgeInsets.zero,
-                title: const Text('Shahidul Islam'),
+                title: const Text('Linggom Marpaung'),
                 titleTextStyle: _theme.textTheme.bodyLarge?.copyWith(
                   fontWeight: FontWeight.w600,
                 ),

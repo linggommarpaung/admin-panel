@@ -1,0 +1,25 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - main # Ini adalah branch yang akan memicu workflow ini
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest # Server yang akan menjalankan langkah-langkah ini
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3 # Mengambil kode dari repositori
+
+      - name: Deploy with rsync
+        uses: burnett01/rsync-deployments@5.2.1 # Menggunakan rsync untuk sinkronisasi file
+        with:
+          switches: -avzr --delete --include='.htaccess' --include='*/' --exclude='*' # Opsi untuk sinkronisasi
+          path: /build/web/ # Folder yang akan di-deploy
+          remote_host: ${{ secrets.SERVER_HOST }} # Alamat IP atau hostname server
+          remote_user: ${{ secrets.SERVER_USER }} # Nama pengguna SSH di server
+          remote_port: 64000 # Port SSH
+          remote_key: ${{ secrets.SERVER_SSH_KEY }} # Kunci SSH yang digunakan untuk otentikasi
+          remote_path: /home/deutsche/admin.deutschefreunde.com # Folder di server tujuan deployment
