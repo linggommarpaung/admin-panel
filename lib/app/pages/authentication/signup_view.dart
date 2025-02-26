@@ -39,20 +39,22 @@ class _SignupViewState extends State<SignupView> {
       try {
         final response = await http.post(
           Uri.parse(
-              'https://api.tun.asia/signup.php'), // <----- Ganti dengan API endpoint kamu
+              'https://uv.deutschefreunde.com/api/api.php?register_user'), // <----- Ganti dengan API endpoint kamu
           headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
+            'Content-Type': 'application/x-www-form-urlencoded',
           },
-          body: jsonEncode(<String, String>{
-            'fullName': _fullNameController.text,
+          encoding: Encoding.getByName('utf-8'),
+          body: {
+            // <----- Send data as x-www-form-urlencoded
+            'name': _fullNameController.text,
             'email': _emailController.text,
             'password': _passwordController.text,
-          }),
+          },
         );
 
-        if (response.statusCode == 201) {
-          // <----- Ganti dengan kode sukses yang sesuai
-          // Pendaftaran berhasil, tampilkan pesan dan/atau navigasi
+        final responseData = jsonDecode(response.body); // Decode response
+        if (responseData['value'] == 1) {
+          //Register Success
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
                 content:
@@ -60,10 +62,13 @@ class _SignupViewState extends State<SignupView> {
           );
           context.go('/authentication/signin'); // Navigasi ke halaman login
         } else {
-          // Tangani kesalahan pendaftaran
-          final errorData = jsonDecode(response.body);
-          String errorMessage = errorData['error'] ??
-              lang.signupFailed; // "Pendaftaran gagal" sesuaikan juga dengan l10n
+          //Check Error
+          String errorMessage = lang.signupFailed;
+          if (responseData['message'] == "oops! Email already registered!") {
+            errorMessage = lang.emailAlreadyExist; // Email already exist
+          } else if (responseData['message'] == "Register failed!") {
+            errorMessage = lang.dataNotComplete; // Data not complete, or method not allowed
+          }
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(errorMessage)),
           );

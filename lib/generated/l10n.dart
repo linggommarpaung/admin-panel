@@ -250,6 +250,26 @@ class S {
     );
   }
 
+  ///Email already exist
+  String get emailAlreadyExist {
+    return Intl.message(
+      'Email already exist',
+      name: 'emailAlreadyExist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  ///Data not complete
+  String get dataNotComplete {
+    return Intl.message(
+      'Data not complete',
+      name: 'dataNotComplete',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Use Google`
   String get useGoogle {
     return Intl.message(
