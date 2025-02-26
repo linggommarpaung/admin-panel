@@ -33,7 +33,7 @@ class _SignupViewState extends State<SignupView> {
   bool _isLoading = false; // Menambahkan state untuk loading
 
   Future<void> _submitForm() async {
-    final lang = l.S.of(context); // <----- PINDAHKAN DISINI
+    final lang = l.S.of(context);
     if (_formKey.currentState!.validate()) {
       setState(() => _isLoading = true); // Mengatur loading menjadi true
       try {
