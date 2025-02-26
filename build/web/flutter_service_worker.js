@@ -3,7 +3,7 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 
-const RESOURCES = {"flutter_bootstrap.js": "ecfaaab588a14d8e8efe3c33211fd840",
+const RESOURCES = {"flutter_bootstrap.js": "c2ae417c9d66501f4c7b6bd6a5dd02c8",
 "version.json": "0bd9951a60d300bded94943bbdfec954",
 "index.html": "b3139b04913d4d915bc0bbffef1ba30a",
 "/": "b3139b04913d4d915bc0bbffef1ba30a",
@@ -16,7 +16,7 @@ const RESOURCES = {"flutter_bootstrap.js": "ecfaaab588a14d8e8efe3c33211fd840",
 "icons/Icon-512.png": "5f8a05e594deb0708b3dd3aa3d6dcf9f",
 "manifest.json": "8bec0160dbedd026e8e70e56a37df8e6",
 "assets/AssetManifest.json": "53b5322d12324fcc134a5970c62bc711",
-"assets/NOTICES": "edd3977226e6c64d99911d9b33b99e25",
+"assets/NOTICES": "bbf2fefa70116c9097979c6c48c63d7c",
 "assets/FontManifest.json": "a76b272f895b41badfb788c94b4bca67",
 "assets/AssetManifest.bin.json": "af7fa1d78fe09bcbe47a87d6ccc3b9c8",
 "assets/packages/iconsax_plus/fonts/IconsaxPlusBroken.ttf": "603acffd941a58c3d521dcf4334d66c4",

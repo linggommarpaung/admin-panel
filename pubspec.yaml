@@ -10,8 +10,6 @@ environment:
   
 dependencies:
 
-  firebase_auth: ^4.6.3
-  firebase_core: ^2.14.0
 
   flutter_localization: ^0.3.0
   flutter:
