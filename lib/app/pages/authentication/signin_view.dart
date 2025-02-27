@@ -138,251 +138,254 @@ class _SigninViewState extends State<SigninView> {
                           child: Center(
                             child: SingleChildScrollView(
                               padding: const EdgeInsets.all(16),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    lang.signIn,
-                                    //'Sign in',
-                                    style: _theme.textTheme.headlineSmall
-                                        ?.copyWith(
-                                      fontWeight: FontWeight.w700,
+                              child: Form(
+                                key: _formKey,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      lang.signIn,
+                                      //'Sign in',
+                                      style: _theme.textTheme.headlineSmall
+                                          ?.copyWith(
+                                        fontWeight: FontWeight.w700,
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(height: 10),
-
-                                  Text.rich(
-                                    TextSpan(
-                                      // text: 'Need an account? ',
-                                      text: lang.needAnAccount,
-                                      children: [
-                                        TextSpan(
-                                          // text: 'Sign up',
-                                          text: lang.signUp,
-                                          style: _theme.textTheme.labelLarge
-                                              ?.copyWith(
-                                            color: _theme.colorScheme.primary,
+                                    const SizedBox(height: 10),
+                                
+                                    Text.rich(
+                                      TextSpan(
+                                        // text: 'Need an account? ',
+                                        text: lang.needAnAccount,
+                                        children: [
+                                          TextSpan(
+                                            // text: 'Sign up',
+                                            text: lang.signUp,
+                                            style: _theme.textTheme.labelLarge
+                                                ?.copyWith(
+                                              color: _theme.colorScheme.primary,
+                                            ),
+                                            recognizer: TapGestureRecognizer()
+                                              ..onTap = () {
+                                                context.push(
+                                                  '/authentication/signup',
+                                                );
+                                              },
                                           ),
-                                          recognizer: TapGestureRecognizer()
-                                            ..onTap = () {
-                                              context.push(
-                                                '/authentication/signup',
-                                              );
-                                            },
+                                        ],
+                                      ),
+                                      style:
+                                          _theme.textTheme.labelLarge?.copyWith(
+                                        color: _theme.checkboxTheme.side?.color,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 16),
+                                
+                                    // SSO Login Buttons
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Flexible(
+                                          child: OutlinedButton.icon(
+                                            onPressed: () {},
+                                            // label: const Text('Use Google'),
+                                            label: Text(lang.useGoogle),
+                                            icon: getImageType(
+                                              AcnooStaticImage.googleIcon,
+                                              height: 14,
+                                              width: 14,
+                                            ),
+                                            style: _ssoButtonStyle,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 10),
+                                        Flexible(
+                                          child: OutlinedButton.icon(
+                                            onPressed: () {},
+                                            //label: const Text('Use Apple'),
+                                            label: Text(lang.useApple),
+                                            icon: getImageType(
+                                              AcnooStaticImage.appleIcon,
+                                              height: 14,
+                                              width: 14,
+                                            ),
+                                            style: _ssoButtonStyle,
+                                          ),
                                         ),
                                       ],
                                     ),
-                                    style:
-                                        _theme.textTheme.labelLarge?.copyWith(
-                                      color: _theme.checkboxTheme.side?.color,
+                                    const SizedBox(height: 20),
+                                
+                                    // Divider
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Flexible(
+                                          child: Container(
+                                            height: 1,
+                                            color: _theme.colorScheme.outline,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 10),
+                                        Text(
+                                          lang.or,
+                                          //'or',
+                                          style: _theme.textTheme.bodyMedium
+                                              ?.copyWith(),
+                                        ),
+                                        const SizedBox(width: 10),
+                                        Flexible(
+                                          child: Container(
+                                            height: 1,
+                                            color: _theme.colorScheme.outline,
+                                          ),
+                                        )
+                                      ],
                                     ),
-                                  ),
-                                  const SizedBox(height: 16),
-
-                                  // SSO Login Buttons
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Flexible(
-                                        child: OutlinedButton.icon(
-                                          onPressed: () {},
-                                          // label: const Text('Use Google'),
-                                          label: Text(lang.useGoogle),
-                                          icon: getImageType(
-                                            AcnooStaticImage.googleIcon,
-                                            height: 14,
-                                            width: 14,
-                                          ),
-                                          style: _ssoButtonStyle,
+                                
+                                    // Email Field
+                                    TextFieldLabelWrapper(
+                                      //labelText: 'Email',
+                                      labelText: lang.email,
+                                      inputField: TextFormField(
+                                        controller: _emailController,
+                                        keyboardType: TextInputType.emailAddress,
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return lang.pleaseEnterEmail;
+                                          }
+                                          if (!HelperFunctions.isValidEmail(
+                                              value)) {
+                                            return lang.invalidEmail;
+                                          }
+                                          return null;
+                                        },
+                                        decoration: InputDecoration(
+                                          //hintText: 'Enter your email address',
+                                          hintText: lang.enterYourEmailAddress,
                                         ),
-                                      ),
-                                      const SizedBox(width: 10),
-                                      Flexible(
-                                        child: OutlinedButton.icon(
-                                          onPressed: () {},
-                                          //label: const Text('Use Apple'),
-                                          label: Text(lang.useApple),
-                                          icon: getImageType(
-                                            AcnooStaticImage.appleIcon,
-                                            height: 14,
-                                            width: 14,
-                                          ),
-                                          style: _ssoButtonStyle,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 20),
-
-                                  // Divider
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Flexible(
-                                        child: Container(
-                                          height: 1,
-                                          color: _theme.colorScheme.outline,
-                                        ),
-                                      ),
-                                      const SizedBox(width: 10),
-                                      Text(
-                                        lang.or,
-                                        //'or',
-                                        style: _theme.textTheme.bodyMedium
-                                            ?.copyWith(),
-                                      ),
-                                      const SizedBox(width: 10),
-                                      Flexible(
-                                        child: Container(
-                                          height: 1,
-                                          color: _theme.colorScheme.outline,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-
-                                  // Email Field
-                                  TextFieldLabelWrapper(
-                                    //labelText: 'Email',
-                                    labelText: lang.email,
-                                    inputField: TextFormField(
-                                      controller: _emailController,
-                                      keyboardType: TextInputType.emailAddress,
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return lang.pleaseEnterEmail;
-                                        }
-                                        if (!HelperFunctions.isValidEmail(
-                                            value)) {
-                                          return lang.invalidEmail;
-                                        }
-                                        return null;
-                                      },
-                                      decoration: InputDecoration(
-                                        //hintText: 'Enter your email address',
-                                        hintText: lang.enterYourEmailAddress,
                                       ),
                                     ),
-                                  ),
-                                  const SizedBox(height: 20),
-
-                                  // Password Field
-                                  TextFieldLabelWrapper(
-                                    //labelText: 'Password',
-                                    labelText: lang.password,
-                                    inputField: TextFormField(
-                                      controller: _passwordController,
-                                      obscureText: !showPassword,
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return lang.pleaseEnterPassword;
-                                        }
-                                        return null;
-                                      },
-                                      decoration: InputDecoration(
-                                        //hintText: 'Enter your password',
-                                        hintText: lang.enterYourPassword,
-                                        suffixIcon: IconButton(
-                                          onPressed: () => setState(
-                                            () => showPassword = !showPassword,
-                                          ),
-                                          icon: Icon(
-                                            showPassword
-                                                ? FeatherIcons.eye
-                                                : FeatherIcons.eyeOff,
+                                    const SizedBox(height: 20),
+                                
+                                    // Password Field
+                                    TextFieldLabelWrapper(
+                                      //labelText: 'Password',
+                                      labelText: lang.password,
+                                      inputField: TextFormField(
+                                        controller: _passwordController,
+                                        obscureText: !showPassword,
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return lang.pleaseEnterPassword;
+                                          }
+                                          return null;
+                                        },
+                                        decoration: InputDecoration(
+                                          //hintText: 'Enter your password',
+                                          hintText: lang.enterYourPassword,
+                                          suffixIcon: IconButton(
+                                            onPressed: () => setState(
+                                              () => showPassword = !showPassword,
+                                            ),
+                                            icon: Icon(
+                                              showPassword
+                                                  ? FeatherIcons.eye
+                                                  : FeatherIcons.eyeOff,
+                                            ),
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  const SizedBox(height: 20),
-
-                                  // Remember Me / Forgot Password
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      // Remember Me
-                                      Flexible(
-                                        child: Text.rich(
-                                          TextSpan(
-                                            children: [
-                                              WidgetSpan(
-                                                alignment:
-                                                    PlaceholderAlignment.middle,
-                                                child: SizedBox.square(
-                                                  dimension: 16,
-                                                  child: Checkbox(
-                                                    value: rememberMe,
-                                                    onChanged: (value) =>
-                                                        setState(
-                                                      () => rememberMe = value!,
-                                                    ),
-                                                    visualDensity:
-                                                        const VisualDensity(
-                                                      horizontal: -4,
-                                                      vertical: -2,
+                                    const SizedBox(height: 20),
+                                
+                                    // Remember Me / Forgot Password
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        // Remember Me
+                                        Flexible(
+                                          child: Text.rich(
+                                            TextSpan(
+                                              children: [
+                                                WidgetSpan(
+                                                  alignment:
+                                                      PlaceholderAlignment.middle,
+                                                  child: SizedBox.square(
+                                                    dimension: 16,
+                                                    child: Checkbox(
+                                                      value: rememberMe,
+                                                      onChanged: (value) =>
+                                                          setState(
+                                                        () => rememberMe = value!,
+                                                      ),
+                                                      visualDensity:
+                                                          const VisualDensity(
+                                                        horizontal: -4,
+                                                        vertical: -2,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                              const WidgetSpan(
-                                                child: SizedBox(width: 6),
-                                              ),
-                                              TextSpan(
-                                                // text: 'Remember Me',
-                                                text: lang.rememberMe,
-                                                mouseCursor:
-                                                    SystemMouseCursors.click,
-                                                recognizer:
-                                                    TapGestureRecognizer()
-                                                      ..onTap = () => setState(
-                                                            () => rememberMe =
-                                                                !rememberMe,
-                                                          ),
-                                              ),
-                                            ],
+                                                const WidgetSpan(
+                                                  child: SizedBox(width: 6),
+                                                ),
+                                                TextSpan(
+                                                  // text: 'Remember Me',
+                                                  text: lang.rememberMe,
+                                                  mouseCursor:
+                                                      SystemMouseCursors.click,
+                                                  recognizer:
+                                                      TapGestureRecognizer()
+                                                        ..onTap = () => setState(
+                                                              () => rememberMe =
+                                                                  !rememberMe,
+                                                            ),
+                                                ),
+                                              ],
+                                            ),
+                                            style: _theme.textTheme.labelLarge
+                                                ?.copyWith(
+                                              color: _theme
+                                                  .checkboxTheme.side?.color,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ),
+                                
+                                        // Forgot Password
+                                        Text.rich(
+                                          TextSpan(
+                                            //text: 'Forgot Password?',
+                                            text: lang.forgotPassword,
+                                            mouseCursor: SystemMouseCursors.click,
+                                            recognizer: TapGestureRecognizer()
+                                              ..onTap = () =>
+                                                  _handleForgotPassword(context),
                                           ),
                                           style: _theme.textTheme.labelLarge
                                               ?.copyWith(
-                                            color: _theme
-                                                .checkboxTheme.side?.color,
+                                            color: _theme.primaryColor,
                                           ),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ),
-
-                                      // Forgot Password
-                                      Text.rich(
-                                        TextSpan(
-                                          //text: 'Forgot Password?',
-                                          text: lang.forgotPassword,
-                                          mouseCursor: SystemMouseCursors.click,
-                                          recognizer: TapGestureRecognizer()
-                                            ..onTap = () =>
-                                                _handleForgotPassword(context),
-                                        ),
-                                        style: _theme.textTheme.labelLarge
-                                            ?.copyWith(
-                                          color: _theme.primaryColor,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  const SizedBox(height: 20),
-
-                                  // Submit Button
-                                  SizedBox(
-                                    width: double.maxFinite,
-                                    child: _isLoading
-                                        ? const CircularProgressIndicator()
-                                        : ElevatedButton(
-                                            onPressed: _submitForm,
-                                            child: Text(lang.signIn),
-                                          ),
-                                  )
-                                ],
+                                        )
+                                      ],
+                                    ),
+                                    const SizedBox(height: 20),
+                                
+                                    // Submit Button
+                                    SizedBox(
+                                      width: double.maxFinite,
+                                      child: _isLoading
+                                          ? const CircularProgressIndicator()
+                                          : ElevatedButton(
+                                              onPressed: _submitForm,
+                                              child: Text(lang.signIn),
+                                            ),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ),

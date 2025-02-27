@@ -13,10 +13,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3 # Mengambil kode dari repositori
 
+      - name: Copy .htaccess to build directory
+        run: cp .htaccess build/web/.htaccess
+
       - name: Deploy with rsync
         uses: burnett01/rsync-deployments@5.2.1 # Menggunakan rsync untuk sinkronisasi file
         with:
-          switches: -avzr --delete --include='.htaccess' --include='*/' --exclude='*' # Opsi untuk sinkronisasi
+          switches: -avzr --delete # Opsi untuk sinkronisasi
           path: /build/web/ # Folder yang akan di-deploy
           remote_host: ${{ secrets.SERVER_HOST }} # Alamat IP atau hostname server
           remote_user: ${{ secrets.SERVER_USER }} # Nama pengguna SSH di server
