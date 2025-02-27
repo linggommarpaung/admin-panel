@@ -160,6 +160,26 @@ class S {
     );
   }
 
+  ///Sign in Successful
+  String get signInSuccessful {
+    return Intl.message(
+      'Sign in Successful',
+      name: 'signInSuccessful',
+      desc: '',
+      args: [],
+    );
+  }
+
+  ///Sign in Failed
+  String get signInFailed {
+    return Intl.message(
+      'Sign in Failed',
+      name: 'signInFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Need an account?`
   String get needAnAccount {
     return Intl.message(
@@ -173,7 +193,7 @@ class S {
   /// `Sign up`
   String get signUp {
     return Intl.message(
-      'Sign up',
+      'Sign Up',
       name: 'signUp',
       desc: '',
       args: [],

@@ -1,6 +1,9 @@
 // 🐦 Flutter imports:
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
 
 // 📦 Package imports:
 import 'package:feather_icons/feather_icons.dart';
@@ -24,6 +27,64 @@ class SigninView extends StatefulWidget {
 class _SigninViewState extends State<SigninView> {
   bool rememberMe = false;
   bool showPassword = false;
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  bool _isLoading = false;
+
+  Future<void> _submitForm() async {
+    final lang = l.S.of(context);
+    if (_formKey.currentState!.validate()) {
+      setState(() => _isLoading = true);
+      try {
+        final response = await http.post(
+          Uri.parse(
+              'https://uv.deutschefreunde.com/api/api.php?login_user'), // Replace with your login API endpoint
+          headers: <String, String>{
+            'Content-Type': 'application/x-www-form-urlencoded', // Adjust as needed for your API
+          },
+          encoding: Encoding.getByName('utf-8'),
+          body: jsonEncode({
+            'email': _emailController.text,
+            'password': _passwordController.text,
+          }),
+        );
+
+        final responseData = jsonDecode(response.body);
+
+        if (response.statusCode == 200) {
+          final responseData = jsonDecode(response.body);
+          if (responseData['status'] == 'success' ||
+              responseData['value'] == 1) {
+            //Sesuaikan dengan respon API Anda
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(lang.signInSuccessful)),
+            );
+            context.go('/dashboard/ecommerce-admin');
+          } else {
+            String errorMessage = lang.signInFailed;
+            if (responseData['message'] != null) {
+              errorMessage = responseData['message'];
+            } else if (responseData['error'] != null) {
+              //Atau jika error ada di field 'error'
+              errorMessage = responseData['error'];
+            }
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(errorMessage)));
+          }
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text("${lang.signInFailed} - ${response.statusCode}")));
+        }
+      } catch (e) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(lang.networkError)));
+      } finally {
+        setState(() => _isLoading = false);
+      }
+
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -186,6 +247,18 @@ class _SigninViewState extends State<SigninView> {
                                     //labelText: 'Email',
                                     labelText: lang.email,
                                     inputField: TextFormField(
+                                      controller: _emailController,
+                                      keyboardType: TextInputType.emailAddress,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return lang.pleaseEnterEmail;
+                                        }
+                                        if (!HelperFunctions.isValidEmail(
+                                            value)) {
+                                          return lang.invalidEmail;
+                                        }
+                                        return null;
+                                      },
                                       decoration: InputDecoration(
                                         //hintText: 'Enter your email address',
                                         hintText: lang.enterYourEmailAddress,
@@ -199,7 +272,14 @@ class _SigninViewState extends State<SigninView> {
                                     //labelText: 'Password',
                                     labelText: lang.password,
                                     inputField: TextFormField(
+                                      controller: _passwordController,
                                       obscureText: !showPassword,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return lang.pleaseEnterPassword;
+                                        }
+                                        return null;
+                                      },
                                       decoration: InputDecoration(
                                         //hintText: 'Enter your password',
                                         hintText: lang.enterYourPassword,
@@ -295,11 +375,12 @@ class _SigninViewState extends State<SigninView> {
                                   // Submit Button
                                   SizedBox(
                                     width: double.maxFinite,
-                                    child: ElevatedButton(
-                                      onPressed: () {},
-                                      // child: const Text('Sign In'),
-                                      child: Text(lang.signIn),
-                                    ),
+                                    child: _isLoading
+                                        ? const CircularProgressIndicator()
+                                        : ElevatedButton(
+                                            onPressed: _submitForm,
+                                            child: Text(lang.signIn),
+                                          ),
                                   )
                                 ],
                               ),
@@ -343,6 +424,13 @@ class _SigninViewState extends State<SigninView> {
       },
     );
     devLogger(_result.toString());
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 }
 
