@@ -3,7 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
+import 'package:http/http.dart';
 
 // 📦 Package imports:
 import 'package:feather_icons/feather_icons.dart';
@@ -41,24 +41,30 @@ class _SigninViewState extends State<SigninView> {
           Uri.parse(
               'https://uv.deutschefreunde.com/api/api.php?login_user'), // Replace with your login API endpoint
           headers: <String, String>{
-            'Content-Type': 'application/x-www-form-urlencoded', // Adjust as needed for your API
+            'Content-Type':
+                'application/x-www-form-urlencoded', // Gunakan application/x-www-form-urlencoded
           },
-          encoding: Encoding.getByName('utf-8'),
-          body: jsonEncode({
+          // encoding: Encoding.getByName('utf-8'), //hapus baris ini
+          body: {
+            // sesuaikan body request
             'email': _emailController.text,
             'password': _passwordController.text,
-          }),
+          },
         );
 
-        final responseData = jsonDecode(response.body);
+        print(response.body); // Tambahkan untuk cek respon
 
         if (response.statusCode == 200) {
           final responseData = jsonDecode(response.body);
-          if (responseData['status'] == 'success' ||
-              responseData['value'] == 1) {
-            //Sesuaikan dengan respon API Anda
+
+          print(responseData); // tambahkan untuk cek data yang dikirim
+
+          if (responseData['status'] == 'ok') {
+            //sesuaikan pengecekan dengan respon API
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(lang.signInSuccessful)),
+              SnackBar(
+                  content: Text(
+                      responseData['message'])), // tampilkan message dari API
             );
             context.go('/dashboard/ecommerce-admin');
           } else {
@@ -66,8 +72,10 @@ class _SigninViewState extends State<SigninView> {
             if (responseData['message'] != null) {
               errorMessage = responseData['message'];
             } else if (responseData['error'] != null) {
-              //Atau jika error ada di field 'error'
               errorMessage = responseData['error'];
+            } else {
+              errorMessage =
+                  responseData.toString(); // menampilkan seluruh respon data
             }
             ScaffoldMessenger.of(context)
                 .showSnackBar(SnackBar(content: Text(errorMessage)));
@@ -77,12 +85,12 @@ class _SigninViewState extends State<SigninView> {
               content: Text("${lang.signInFailed} - ${response.statusCode}")));
         }
       } catch (e) {
+        print(e); //tampilkan error detail
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(lang.networkError)));
       } finally {
         setState(() => _isLoading = false);
       }
-
     }
   }
 
@@ -152,7 +160,7 @@ class _SigninViewState extends State<SigninView> {
                                       ),
                                     ),
                                     const SizedBox(height: 10),
-                                
+
                                     Text.rich(
                                       TextSpan(
                                         // text: 'Need an account? ',
@@ -180,10 +188,11 @@ class _SigninViewState extends State<SigninView> {
                                       ),
                                     ),
                                     const SizedBox(height: 16),
-                                
+
                                     // SSO Login Buttons
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Flexible(
                                           child: OutlinedButton.icon(
@@ -215,7 +224,7 @@ class _SigninViewState extends State<SigninView> {
                                       ],
                                     ),
                                     const SizedBox(height: 20),
-                                
+
                                     // Divider
                                     Row(
                                       mainAxisAlignment:
@@ -243,14 +252,15 @@ class _SigninViewState extends State<SigninView> {
                                         )
                                       ],
                                     ),
-                                
+
                                     // Email Field
                                     TextFieldLabelWrapper(
                                       //labelText: 'Email',
                                       labelText: lang.email,
                                       inputField: TextFormField(
                                         controller: _emailController,
-                                        keyboardType: TextInputType.emailAddress,
+                                        keyboardType:
+                                            TextInputType.emailAddress,
                                         validator: (value) {
                                           if (value == null || value.isEmpty) {
                                             return lang.pleaseEnterEmail;
@@ -268,7 +278,7 @@ class _SigninViewState extends State<SigninView> {
                                       ),
                                     ),
                                     const SizedBox(height: 20),
-                                
+
                                     // Password Field
                                     TextFieldLabelWrapper(
                                       //labelText: 'Password',
@@ -287,7 +297,8 @@ class _SigninViewState extends State<SigninView> {
                                           hintText: lang.enterYourPassword,
                                           suffixIcon: IconButton(
                                             onPressed: () => setState(
-                                              () => showPassword = !showPassword,
+                                              () =>
+                                                  showPassword = !showPassword,
                                             ),
                                             icon: Icon(
                                               showPassword
@@ -299,7 +310,7 @@ class _SigninViewState extends State<SigninView> {
                                       ),
                                     ),
                                     const SizedBox(height: 20),
-                                
+
                                     // Remember Me / Forgot Password
                                     Row(
                                       mainAxisAlignment:
@@ -312,14 +323,16 @@ class _SigninViewState extends State<SigninView> {
                                               children: [
                                                 WidgetSpan(
                                                   alignment:
-                                                      PlaceholderAlignment.middle,
+                                                      PlaceholderAlignment
+                                                          .middle,
                                                   child: SizedBox.square(
                                                     dimension: 16,
                                                     child: Checkbox(
                                                       value: rememberMe,
                                                       onChanged: (value) =>
                                                           setState(
-                                                        () => rememberMe = value!,
+                                                        () =>
+                                                            rememberMe = value!,
                                                       ),
                                                       visualDensity:
                                                           const VisualDensity(
@@ -339,10 +352,11 @@ class _SigninViewState extends State<SigninView> {
                                                       SystemMouseCursors.click,
                                                   recognizer:
                                                       TapGestureRecognizer()
-                                                        ..onTap = () => setState(
-                                                              () => rememberMe =
-                                                                  !rememberMe,
-                                                            ),
+                                                        ..onTap =
+                                                            () => setState(
+                                                                  () => rememberMe =
+                                                                      !rememberMe,
+                                                                ),
                                                 ),
                                               ],
                                             ),
@@ -354,16 +368,18 @@ class _SigninViewState extends State<SigninView> {
                                             textAlign: TextAlign.center,
                                           ),
                                         ),
-                                
+
                                         // Forgot Password
                                         Text.rich(
                                           TextSpan(
                                             //text: 'Forgot Password?',
                                             text: lang.forgotPassword,
-                                            mouseCursor: SystemMouseCursors.click,
+                                            mouseCursor:
+                                                SystemMouseCursors.click,
                                             recognizer: TapGestureRecognizer()
                                               ..onTap = () =>
-                                                  _handleForgotPassword(context),
+                                                  _handleForgotPassword(
+                                                      context),
                                           ),
                                           style: _theme.textTheme.labelLarge
                                               ?.copyWith(
@@ -373,7 +389,7 @@ class _SigninViewState extends State<SigninView> {
                                       ],
                                     ),
                                     const SizedBox(height: 20),
-                                
+
                                     // Submit Button
                                     SizedBox(
                                       width: double.maxFinite,
