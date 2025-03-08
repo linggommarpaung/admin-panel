@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "deutsche-freunde07"
-  }
+    "default": "deutsche-freunde-indonesia",
+    "admin-panel-dfi": "deutsche-freunde-indonesia"
+  },
+  "targets": {},
+  "etags": {}
 }

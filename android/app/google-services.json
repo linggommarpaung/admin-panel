@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "88945434212",
+    "firebase_url": "https://deutsche-freunde-indonesia-default-rtdb.firebaseio.com",
+    "project_id": "deutsche-freunde-indonesia",
+    "storage_bucket": "deutsche-freunde-indonesia.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:88945434212:android:c938fc3c6b9147748c4971",
+        "android_client_info": {
+          "package_name": "com.appsheet.whitelabel.guid_3e85662d_c17f_4343_a7d8_4e2df6eb5ec8"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "88945434212-7mio5jpr5c6kefkl33h2rdi4bhqu00ef.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPdWD4xqItYlzCHzQSsPCtOnJZAYxKgno"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "88945434212-7mio5jpr5c6kefkl33h2rdi4bhqu00ef.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:88945434212:android:232373d2bf587c998c4971",
+        "android_client_info": {
+          "package_name": "com.deutschefreunde.auth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "88945434212-7mio5jpr5c6kefkl33h2rdi4bhqu00ef.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPdWD4xqItYlzCHzQSsPCtOnJZAYxKgno"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "88945434212-7mio5jpr5c6kefkl33h2rdi4bhqu00ef.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:88945434212:android:70212aff0ddd9a248c4971",
+        "android_client_info": {
+          "package_name": "com.deutschefreunde077"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "88945434212-7mio5jpr5c6kefkl33h2rdi4bhqu00ef.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPdWD4xqItYlzCHzQSsPCtOnJZAYxKgno"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "88945434212-7mio5jpr5c6kefkl33h2rdi4bhqu00ef.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-7802948194339039~3432917582"
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "admin-panel-dfi",
     "public": "build/web/",
     "ignore": [
       "firebase.json",

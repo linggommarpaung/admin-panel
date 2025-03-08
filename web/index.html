@@ -36,6 +36,30 @@
 </script>
 </head>
 <body>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyB6Mo1w81l_OtySo1SCqlhJhCL9weGd-_k",
+      authDomain: "deutsche-freunde-indonesia.firebaseapp.com",
+      databaseURL: "https://deutsche-freunde-indonesia-default-rtdb.firebaseio.com",
+      projectId: "deutsche-freunde-indonesia",
+      storageBucket: "deutsche-freunde-indonesia.firebasestorage.app",
+      messagingSenderId: "88945434212",
+      appId: "1:88945434212:web:91575d58ef673fc48c4971",
+      measurementId: "G-W7LRWC2TTT"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
