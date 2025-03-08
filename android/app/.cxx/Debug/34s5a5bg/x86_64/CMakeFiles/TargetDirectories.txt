@@ -1,0 +1,2 @@
+/Users/linggommarpaung/Documents/GitHub/admin-panel/android/app/.cxx/Debug/34s5a5bg/x86_64/CMakeFiles/edit_cache.dir
+/Users/linggommarpaung/Documents/GitHub/admin-panel/android/app/.cxx/Debug/34s5a5bg/x86_64/CMakeFiles/rebuild_cache.dir

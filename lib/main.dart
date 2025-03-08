@@ -22,13 +22,18 @@ import 'package:firebase_core/firebase_core.dart';
 Future<void> main() async {
   setPathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: FirebaseOptions(
-      apiKey: "AIzaSyB6Mo1w81l_OtySo1SCqlhJhCL9weGd-_k",
-      appId: "1:88945434212:web:91575d58ef673fc48c4971",
-      messagingSenderId: "88945434212",
-      projectId: "deutsche-freunde-indonesia",
-  ));
+  if (kIsWeb) {
+    await Firebase.initializeApp(
+      options: FirebaseOptions(
+        apiKey: "AIzaSyB6Mo1w81l_OtySo1SCqlhJhCL9weGd-_k",
+        appId: "1:88945434212:web:91575d58ef673fc48c4971",
+        messagingSenderId: "88945434212",
+        projectId: "deutsche-freunde-indonesia",
+      ),
+    );
+  } else {
+    await Firebase.initializeApp();
+  }
   ResponsiveGridBreakpoints.value = ResponsiveGridBreakpoints(
     sm: 576,
     md: 1240,

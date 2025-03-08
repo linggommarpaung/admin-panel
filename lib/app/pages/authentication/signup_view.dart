@@ -17,6 +17,9 @@ import '../../widgets/widgets.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+//Firebase Auth
+import 'package:firebase_auth/firebase_auth.dart';
+
 class SignupView extends StatefulWidget {
   const SignupView({super.key});
 
@@ -67,7 +70,8 @@ class _SignupViewState extends State<SignupView> {
           if (responseData['message'] == "Oops! Email already registered!") {
             errorMessage = lang.emailAlreadyExist; // Email already exist
           } else if (responseData['message'] == "Register failed!") {
-            errorMessage = lang.dataNotComplete; // Data not complete, or method not allowed
+            errorMessage = lang
+                .dataNotComplete; // Data not complete, or method not allowed
           }
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(errorMessage)),
@@ -76,11 +80,43 @@ class _SignupViewState extends State<SignupView> {
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-              content: Text(lang.networkError)), // "Kesalahan jaringan" sesuaikan juga dengan l10n
+              content: Text(lang
+                  .networkError)), // "Kesalahan jaringan" sesuaikan juga dengan l10n
         );
       } finally {
         setState(() => _isLoading = false); // Mengatur loading menjadi false
       }
+    }
+  }
+
+  Future<void> _firebaseSubmitForm() async {
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+      User? user = userCredential.user;
+      if (user != null) {
+        await user.sendEmailVerification(); // Kirim email verifikasi
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text(
+                  'Verfication Email has been sent. Please check your Email.')),
+        );
+        context.go('/authentication/signin'); // Kembali ke halaman sign in
+      }
+    } on FirebaseAuthException catch (e) {
+      // Tangani error pendaftaran
+      String errorMessage = 'Something went wrong while signing up.';
+      if (e.code == 'weak-password') {
+        errorMessage = 'Password is too weak.';
+      } else if (e.code == 'email-already-in-use') {
+        errorMessage = 'Email already exists.';
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(errorMessage)),
+      );
     }
   }
 
@@ -212,8 +248,6 @@ class _SignupViewState extends State<SignupView> {
                                     ],
                                   ),
                                   const SizedBox(height: 20),
-
-                                  // Divider
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
@@ -240,75 +274,55 @@ class _SignupViewState extends State<SignupView> {
                                       )
                                     ],
                                   ),
-
-                                  // Full Name Field
                                   TextFieldLabelWrapper(
-                                    //labelText: 'Full Name',
                                     labelText: lang.fullName,
                                     inputField: TextFormField(
-                                      controller:
-                                          _fullNameController, // <----- Tambahkan controller
+                                      controller: _fullNameController,
                                       validator: (value) {
-                                        // <----- Tambahkan validator
                                         if (value == null || value.isEmpty) {
-                                          return lang.pleaseEnterFullName; // "Silakan masukkan nama lengkap"
+                                          return lang.pleaseEnterFullName;
                                         }
                                         return null;
                                       },
                                       decoration: InputDecoration(
-                                        // hintText: 'Enter full name',
                                         hintText: lang.enterFullName,
                                       ),
                                     ),
                                   ),
                                   const SizedBox(height: 20),
-
-                                  // Email Field
                                   TextFieldLabelWrapper(
-                                    // labelText: 'Email',
                                     labelText: lang.email,
                                     inputField: TextFormField(
-                                      controller:
-                                          _emailController, // <----- Tambahkan controller
-                                      keyboardType: TextInputType
-                                          .emailAddress, // <----- Tambahkan keyboard type
+                                      controller: _emailController,
+                                      keyboardType: TextInputType.emailAddress,
                                       validator: (value) {
-                                        // <----- Tambahkan validator
                                         if (value == null || value.isEmpty) {
-                                          return lang.pleaseEnterEmail; // "Silakan masukkan email"
+                                          return lang.pleaseEnterEmail;
                                         }
                                         if (!HelperFunctions.isValidEmail(
                                             value)) {
-                                          return lang.invalidEmail; // "Email tidak valid"
+                                          return lang.invalidEmail;
                                         }
                                         return null;
                                       },
                                       decoration: InputDecoration(
-                                        //hintText: 'Enter email address',
                                         hintText: lang.enterEmailAddress,
                                       ),
                                     ),
                                   ),
                                   const SizedBox(height: 20),
-
-                                  // Password Field
                                   TextFieldLabelWrapper(
-                                    //labelText: 'Password',
                                     labelText: lang.password,
                                     inputField: TextFormField(
-                                      controller:
-                                          _passwordController, // <----- Tambahkan controller
+                                      controller: _passwordController,
                                       obscureText: !showPassword,
                                       validator: (value) {
-                                        // <----- Tambahkan validator
                                         if (value == null || value.isEmpty) {
-                                          return lang.pleaseEnterPassword; // "Silakan masukkan password"
+                                          return lang.pleaseEnterPassword;
                                         }
-                                        // Tambahkan validasi password yang lebih kompleks jika diperlukan
                                         return null;
                                       },
                                       decoration: InputDecoration(
-                                        //hintText: 'Enter your password',
                                         hintText: lang.enterYourPassword,
                                         suffixIcon: IconButton(
                                           onPressed: () => setState(
@@ -328,15 +342,12 @@ class _SignupViewState extends State<SignupView> {
                                   // Submit Button
                                   SizedBox(
                                     width: double.maxFinite,
-                                    child:
-                                        _isLoading // <----- Menampilkan CircularProgressIndicator saat loading
-                                            ? const CircularProgressIndicator()
-                                            : ElevatedButton(
-                                                onPressed:
-                                                    _submitForm, // <----- Panggil _submitForm disini
-                                                child: Text(
-                                                    lang.signUp), // "Sign Up"
-                                              ),
+                                    child: _isLoading
+                                        ? const CircularProgressIndicator()
+                                        : ElevatedButton(
+                                            onPressed: _firebaseSubmitForm,
+                                            child: Text(lang.signUp),
+                                          ),
                                   ),
                                 ],
                               ),
