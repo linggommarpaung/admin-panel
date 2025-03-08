@@ -82,7 +82,13 @@ class UserProfileAvatar extends StatelessWidget {
             );
           })
         ],
-        onChanged: (value) {},
+        onChanged: (value) async{
+          if (value == 1) {
+            await FirebaseAuth.instance.signOut();
+            context.go('/authentication/signin');
+          } else if (value == 0) {
+          }
+        },
       ),
     );
   }

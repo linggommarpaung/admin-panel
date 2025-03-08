@@ -15,6 +15,7 @@ import '../../../generated/l10n.dart' as l;
 import '../../core/helpers/fuctions/helper_functions.dart';
 import '../../core/static/static.dart';
 import '../../widgets/widgets.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SigninView extends StatefulWidget {
   const SigninView({super.key});
@@ -90,6 +91,38 @@ class _SigninViewState extends State<SigninView> {
       } finally {
         setState(() => _isLoading = false);
       }
+    }
+  }
+
+  Future<void> _firebaseSubmitForm() async {
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+      User? user = userCredential.user;
+
+      if (user != null) {
+        if (user.emailVerified) {
+            context.go('/dashboard/ecommerce-admin');
+        } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Email is not verfied yet. Please check your verification email.'),
+        ),
+      );
+        }
+      }
+    } on FirebaseAuthException catch (e) {
+      String errorMessage = 'Something went wrong while trying to sign in';
+      if (e.code == 'user-not-found') {
+        errorMessage = 'User is not found.';
+      } else if (e.code == 'wrong-password') {
+        errorMessage = 'Password does not match.';
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(errorMessage)),
+      );
     }
   }
 
@@ -395,7 +428,7 @@ class _SigninViewState extends State<SigninView> {
                                       child: _isLoading
                                           ? const CircularProgressIndicator()
                                           : ElevatedButton(
-                                              onPressed: _submitForm,
+                                              onPressed: _firebaseSubmitForm,
                                               child: Text(lang.signIn),
                                             ),
                                     )

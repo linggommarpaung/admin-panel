@@ -15,10 +15,15 @@ import '../../../../core/helpers/helpers.dart';
 import '../../../../providers/providers.dart';
 import '../../../../widgets/widgets.dart';
 import '../language_dropdown/_language_dropdown.dart';
+import 'package:go_router/go_router.dart';
+
+import 'package:firebase_auth/firebase_auth.dart';
 
 part '_notification_icon_button.dart';
 part '_toggle_theme.dart';
 part '_user_profile_avatar.dart';
+
+
 
 class TopBarWidget extends StatelessWidget implements PreferredSizeWidget {
   const TopBarWidget({super.key, this.onMenuTap});
