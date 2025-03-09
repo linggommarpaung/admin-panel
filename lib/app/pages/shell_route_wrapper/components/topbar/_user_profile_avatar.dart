@@ -3,10 +3,25 @@ part of '_topbar.dart';
 class UserProfileAvatar extends StatelessWidget {
   const UserProfileAvatar({super.key});
 
+  Future<String?> getDisplayNameFromFirestore(String uid) async {
+    try {
+      final snapshot =
+          await FirebaseFirestore.instance.collection('users').doc(uid).get();
+      if (snapshot.exists) {
+        return snapshot.data()?['displayName'] as String?;
+      }
+    } catch (e) {
+      print('Error getting displayName from Firestore: $e');
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     final _theme = Theme.of(context);
     final _dropdownStyle = AcnooDropdownStyle(context);
+    final authProvider = Provider.of<app_main.AuthProvider>(context); //Perlu main.dart
+    final user = authProvider.user;
 
     return ClipRRect(
       clipBehavior: Clip.antiAlias,
@@ -42,7 +57,20 @@ class UserProfileAvatar extends StatelessWidget {
                   vertical: -4,
                 ),
                 contentPadding: EdgeInsets.zero,
-                title: const Text('Linggom Marpaung'),
+                title: FutureBuilder<String?>(
+                  future: user != null
+                      ? getDisplayNameFromFirestore(user.uid)
+                      : Future.value(null),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const CircularProgressIndicator();
+                    } else if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    } else {
+                      return Text(snapshot.data ?? 'User');
+                    }
+                  },
+                ),
                 titleTextStyle: _theme.textTheme.bodyLarge?.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
@@ -82,12 +110,11 @@ class UserProfileAvatar extends StatelessWidget {
             );
           })
         ],
-        onChanged: (value) async{
+        onChanged: (value) async {
           if (value == 1) {
             await FirebaseAuth.instance.signOut();
             context.go('/authentication/signin');
-          } else if (value == 0) {
-          }
+          } else if (value == 0) {}
         },
       ),
     );

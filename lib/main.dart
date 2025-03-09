@@ -17,7 +17,7 @@ import 'app/providers/providers.dart';
 import 'app/routes/app_routes.dart';
 import 'generated/l10n.dart';
 import 'package:firebase_core/firebase_core.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 
 Future<void> main() async {
   setPathUrlStrategy();
@@ -45,6 +45,7 @@ Future<void> main() async {
       ChangeNotifierProvider(create: (_) => AppThemeProvider()),
       ChangeNotifierProvider(create: (_) => AppLanguageProvider()),
       ChangeNotifierProvider(create: (_) => ECommerceMockProductsNotifier()),
+      ChangeNotifierProvider(create: (_) => AuthProvider()), // Tambahkan ini
     ],
     child: const AcnooApp(),
   );
@@ -137,5 +138,22 @@ class AcnooApp extends StatelessWidget {
         );
       },
     );
+  }
+}
+
+class AuthProvider with ChangeNotifier {
+  User? _user;
+
+  User? get user => _user;
+
+  AuthProvider() {
+    _listenAuthStateChanges();
+  }
+
+  void _listenAuthStateChanges() {
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      _user = user;
+      notifyListeners();
+    });
   }
 }

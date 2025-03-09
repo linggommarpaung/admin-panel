@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 // 🌎 Project imports:
 import '../pages/pages.dart';
 import '../providers/providers.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 abstract class AcnooAppRoutes {
   //--------------Navigator Keys--------------//

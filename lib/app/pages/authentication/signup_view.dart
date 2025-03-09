@@ -1,6 +1,7 @@
 // 🐦 Flutter imports:
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // 📦 Package imports:
 import 'package:feather_icons/feather_icons.dart';
@@ -19,6 +20,8 @@ import 'package:http/http.dart' as http;
 
 //Firebase Auth
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:uuid/uuid.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SignupView extends StatefulWidget {
   const SignupView({super.key});
@@ -35,6 +38,8 @@ class _SignupViewState extends State<SignupView> {
   final _passwordController = TextEditingController();
   bool _isLoading = false; // Menambahkan state untuk loading
 
+
+  //Used when using external API
   Future<void> _submitForm() async {
     final lang = l.S.of(context);
     if (_formKey.currentState!.validate()) {
@@ -89,6 +94,17 @@ class _SignupViewState extends State<SignupView> {
     }
   }
 
+  Future<String?> getApplicationId() async {
+    const platform = MethodChannel('com.example.app/app_id');
+    try {
+      final String? result = await platform.invokeMethod('getApplicationId');
+      return result;
+    } on PlatformException catch (e) {
+      print("Failed to get application ID: '${e.message}'.");
+      return null;
+    }
+  }
+
   Future<void> _firebaseSubmitForm() async {
     try {
       UserCredential userCredential =
@@ -98,6 +114,12 @@ class _SignupViewState extends State<SignupView> {
       );
       User? user = userCredential.user;
       if (user != null) {
+        // Perbarui profil pengguna dengan nama lengkap
+        await user.updateProfile(displayName: _fullNameController.text);
+
+        //Tambahkan fungsi untuk membuat dokumen di firestore
+        await _createUserDocument(user); // <---- Tambahkan ini
+
         await user.sendEmailVerification(); // Kirim email verifikasi
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -119,6 +141,30 @@ class _SignupViewState extends State<SignupView> {
       );
     }
   }
+
+  // Fungsi untuk membuat dokumen pengguna di Firestore
+  Future<void> _createUserDocument(User user) async {
+    final uuid = Uuid();
+    final customUserId = uuid.v4(); // Generate UUID
+  final applicationId = await getApplicationId();
+
+    await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+      'uid': user.uid,
+      'email': user.email,
+      'displayName': _fullNameController.text,
+      'customUserId': customUserId, // ID unik Anda
+      'applicationId': applicationId,
+    });
+    // Verifikasi data
+    final doc = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .get();
+    if (doc.exists) {
+      print('Firestore displayName: ${doc.data()?['displayName']}');
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {

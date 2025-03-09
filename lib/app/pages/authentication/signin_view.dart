@@ -32,6 +32,7 @@ class _SigninViewState extends State<SigninView> {
   final _passwordController = TextEditingController();
   bool _isLoading = false;
 
+  //Used when using external API
   Future<void> _submitForm() async {
     final lang = l.S.of(context);
     if (_formKey.currentState!.validate()) {

@@ -16,6 +16,8 @@ import '../../../../providers/providers.dart';
 import '../../../../widgets/widgets.dart';
 import '../language_dropdown/_language_dropdown.dart';
 import 'package:go_router/go_router.dart';
+import '../../../../../main.dart' as app_main;
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 
